@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zildx Panel - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#0b0f1a] text-slate-300 h-screen flex items-center justify-center p-4">
+    <div class="login-card bg-[#101624] p-8 rounded-xl border border-slate-800 shadow-2xl w-full max-w-md">
+        <div class="text-center mb-8">
+            <div class="inline-block p-4 bg-blue-600/10 rounded-full mb-4">
+                <img src="https://pterodactyl.io/logos/pterodactyl_logo.png" alt="Logo" class="w-16">
+            </div>
+            <h1 class="text-2xl font-black text-white tracking-tighter">ZILDX PANEL</h1>
+            <p class="text-xs text-slate-500 uppercase tracking-widest mt-2">Authorization Required</p>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="text-[10px] font-bold text-slate-500 uppercase">Username</label>
+                <input type="text" id="user" class="w-full bg-[#070a13] border border-slate-800 p-3 rounded mt-1 outline-none focus:border-blue-500 transition text-sm">
+            </div>
+            <div>
+                <label class="text-[10px] font-bold text-slate-500 uppercase">Password</label>
+                <input type="password" id="pass" class="w-full bg-[#070a13] border border-slate-800 p-3 rounded mt-1 outline-none focus:border-blue-500 transition text-sm">
+            </div>
+            <button onclick="auth()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all transform active:scale-95 shadow-lg shadow-blue-500/20">
+                LOGIN TO PANEL
+            </button>
+        </div>
+        <p id="err" class="text-red-500 text-[10px] mt-4 text-center font-bold hidden">ACCESS DENIED: INVALID CREDENTIALS</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
