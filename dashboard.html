@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Zildx Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#0b0f1a] text-slate-300 h-screen flex flex-col overflow-hidden">
+    <header class="bg-[#101624] border-b border-slate-800 p-4 flex justify-between items-center z-50">
+        <div class="flex items-center space-x-4">
+            <span class="text-blue-500 font-black italic">ZILDX</span>
+            <div class="h-4 w-[1px] bg-slate-700 hidden md:block"></div>
+            <span class="text-[10px] text-slate-500 uppercase font-bold hidden md:block">Node: sin-01.zildx.id</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="text-right hidden sm:block">
+                <p id="welcome-user" class="text-xs font-bold text-white uppercase"></p>
+                <p class="text-[10px] text-green-500 font-mono">Status: Administrator</p>
+            </div>
+            <button onclick="logout()" class="bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white p-2 rounded transition">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <aside class="w-16 md:w-64 bg-[#101624] border-r border-slate-800 flex flex-col py-4">
+            <nav class="flex-1 space-y-1 px-2">
+                <a href="#" class="flex items-center space-x-3 p-3 bg-blue-600/10 text-blue-500 rounded-lg">
+                    <i class="fas fa-terminal w-5"></i><span class="hidden md:inline font-bold text-sm uppercase">Console</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 hover:bg-slate-800 rounded-lg text-slate-500 transition">
+                    <i class="fas fa-file-code w-5"></i><span class="hidden md:inline font-bold text-sm uppercase">Files</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <h2 class="text-xl font-black text-white tracking-widest uppercase">Console Overview</h2>
+                <div class="flex space-x-2 mt-4 md:mt-0">
+                    <button class="bg-blue-600 px-6 py-2 rounded font-bold text-xs uppercase shadow-lg shadow-blue-500/20">Start</button>
+                    <button class="bg-slate-700 px-6 py-2 rounded font-bold text-xs uppercase">Restart</button>
+                    <button class="bg-red-600 px-6 py-2 rounded font-bold text-xs uppercase">Stop</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="stat-card bg-[#101624] p-5 rounded-lg border border-slate-800">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase">Memory Usage</p>
+                    <p class="text-2xl font-mono text-white mt-1">512MB <span class="text-xs text-slate-600">/ 2GB</span></p>
+                </div>
+                <div class="stat-card bg-[#101624] p-5 rounded-lg border border-slate-800">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase">CPU Load</p>
+                    <p class="text-2xl font-mono text-white mt-1">2.41%</p>
+                </div>
+                <div class="stat-card bg-[#101624] p-5 rounded-lg border border-slate-800">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase">Network IO</p>
+                    <p class="text-2xl font-mono text-blue-400 mt-1">↑ 12kb / ↓ 45kb</p>
+                </div>
+            </div>
+
+            <div class="bg-black rounded-lg border border-slate-800 shadow-2xl overflow-hidden">
+                <div class="bg-[#161b2a] p-2 px-4 flex justify-between border-b border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-500">zildx@ubuntu:~</span>
+                </div>
+                <div id="console-log" class="p-4 h-64 overflow-y-auto font-mono text-[11px] space-y-1">
+                    <p class="text-slate-500">[SYSTEM] Initializing Zildx Virtual Server...</p>
+                    <p class="text-green-500">[OK] Kernel loaded successfully.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
