@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zildx Panel - Server Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#0b0f1a] text-slate-300 h-screen flex flex-col overflow-hidden">
+    
+    <header class="bg-[#101624] border-b border-slate-800 p-3 flex justify-between items-center px-6">
+        <div class="flex items-center space-x-4">
+            <span class="text-blue-500 font-black italic">ZILDX</span>
+            <span class="text-[10px] text-slate-600 uppercase font-bold hidden md:inline">Server: XYZ</span>
+        </div>
+        <div class="flex space-x-4 items-center">
+            <div id="status-badge" class="flex items-center space-x-2 bg-green-500/10 px-3 py-1 rounded border border-green-500/20">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-[10px] text-green-500 font-bold uppercase">Running</span>
+            </div>
+            <button onclick="logout()" class="text-red-500 hover:text-white transition text-sm"><i class="fas fa-power-off"></i></button>
+        </div>
+    </header>
+
+    <nav class="bg-[#101624] border-b border-slate-800 flex overflow-x-auto no-scrollbar">
+        <button onclick="openTab('console')" class="tab-btn active px-6 py-3 text-[11px] font-bold uppercase tracking-wider border-b-2 border-transparent hover:text-white transition">Console</button>
+        <button onclick="openTab('files')" class="tab-btn px-6 py-3 text-[11px] font-bold uppercase tracking-wider border-b-2 border-transparent hover:text-white transition">Files</button>
+        <button onclick="openTab('startup')" class="tab-btn px-6 py-3 text-[11px] font-bold uppercase tracking-wider border-b-2 border-transparent hover:text-white transition">Startup</button>
+        <button onclick="openTab('settings')" class="tab-btn px-6 py-3 text-[11px] font-bold uppercase tracking-wider border-b-2 border-transparent hover:text-white transition">Settings</button>
+        <button onclick="openTab('activity')" class="tab-btn px-6 py-3 text-[11px] font-bold uppercase tracking-wider border-b-2 border-transparent hover:text-white transition">Activity</button>
+    </nav>
+
+    <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+        
+        <div id="console" class="tab-content space-y-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-white uppercase tracking-tighter">XYZ</h2>
+                <div class="flex space-x-2">
+                    <button class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-xs font-bold uppercase">Start</button>
+                    <button class="bg-slate-700 hover:bg-slate-600 px-6 py-2 rounded text-xs font-bold uppercase">Restart</button>
+                    <button class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded text-xs font-bold uppercase">Stop</button>
+                </div>
+            </div>
+            <div class="bg-black rounded-lg border border-slate-800 overflow-hidden shadow-2xl">
+                <div id="console-output" class="p-4 h-80 overflow-y-auto font-mono text-[11px] space-y-1">
+                    <p class="text-slate-500">[SYSTEM] Booting node sin-01...</p>
+                    <p class="text-green-500">[ZILDX] Bot Berhasil Tersambung</p>
+                    <p class="text-white">Nama: BOT - V1.0.0</p>
+                    <p class="text-white">WhatsApp: 62851xxxxxx</p>
+                </div>
+                <div class="bg-[#101624] p-2 flex border-t border-slate-800">
+                    <span class="px-3 text-slate-500">»</span>
+                    <input type="text" class="bg-transparent outline-none flex-1 text-xs font-mono" placeholder="Type a command...">
+                </div>
+            </div>
+        </div>
+
+        <div id="files" class="tab-content hidden space-y-4">
+            <div class="flex justify-between">
+                <p class="text-xs font-bold text-slate-500 uppercase">/home/container</p>
+                <button class="bg-blue-600 text-[10px] px-4 py-1 rounded font-bold">NEW FILE</button>
+            </div>
+            <div class="bg-[#101624] border border-slate-800 rounded-lg overflow-hidden">
+                <div class="p-3 border-b border-slate-800 bg-slate-900/50 flex justify-between text-[10px] font-bold uppercase">
+                    <span>File Name</span>
+                    <span>Size</span>
+                </div>
+                <div class="p-4 hover:bg-slate-800/50 flex justify-between text-xs border-b border-slate-800/50">
+                    <span class="text-blue-400"><i class="fas fa-file-code mr-3"></i> index.js</span>
+                    <span class="text-slate-500">1.2 KB</span>
+                </div>
+                <div class="p-4 hover:bg-slate-800/50 flex justify-between text-xs">
+                    <span class="text-blue-400"><i class="fas fa-file-code mr-3"></i> package.json</span>
+                    <span class="text-slate-500">512 B</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="startup" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-[#101624] border border-slate-800 p-5 rounded-lg">
+                <h3 class="text-xs font-bold uppercase mb-4 text-slate-500 tracking-widest">Startup Command</h3>
+                <textarea class="w-full bg-[#070a13] border border-slate-800 p-3 rounded font-mono text-[10px] h-32" readonly>npm start</textarea>
+            </div>
+            <div class="bg-[#101624] border border-slate-800 p-5 rounded-lg">
+                <h3 class="text-xs font-bold uppercase mb-4 text-slate-500 tracking-widest">Docker Image</h3>
+                <div class="bg-[#070a13] p-3 rounded border border-slate-800 text-xs">ghcr.io/zildx/node:18</div>
+            </div>
+        </div>
+
+        <div id="settings" class="tab-content hidden space-y-6">
+            <div class="max-w-2xl bg-[#101624] border border-slate-800 p-6 rounded-lg">
+                <h3 class="text-white font-bold mb-4">Server Details</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-[10px] uppercase font-bold text-slate-500">Server Name</label>
+                        <input type="text" class="w-full bg-[#070a13] border border-slate-800 p-3 rounded mt-1 text-xs" value="XYZ">
+                    </div>
+                    <button class="bg-blue-600 px-6 py-2 rounded text-xs font-bold uppercase">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="activity" class="tab-content hidden space-y-2">
+            <div class="bg-[#101624] p-4 rounded border border-slate-800 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-blue-600/20 p-2 rounded text-blue-500"><i class="fas fa-play"></i></div>
+                    <div>
+                        <p class="text-xs font-bold text-white">server:power.start</p>
+                        <p class="text-[10px] text-slate-500">Started the server</p>
+                    </div>
+                </div>
+                <span class="text-[10px] font-mono text-slate-600">3 hours ago</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
