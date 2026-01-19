@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zildx Panel - Administrative</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#0b0f1a] text-[#ccd6f6] font-sans h-screen flex flex-col overflow-hidden">
+
+    <header class="bg-[#101624] border-b border-slate-800 p-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-4">
+            <span class="text-blue-500 font-bold text-xl tracking-tighter">ZILDX</span>
+            <div class="h-6 w-[1px] bg-slate-700"></div>
+            <span class="text-sm font-medium text-slate-400">Server Privat Zildx Resmi</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div id="clock" class="text-xs font-mono text-blue-400 bg-blue-900/20 px-3 py-1 rounded border border-blue-500/30">00:00:00</div>
+            <img src="https://ui-avatars.com/api/?name=Zildx&background=0D6EFD&color=fff" class="w-8 h-8 rounded-md border border-blue-500">
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden"> 
+        <aside class="w-16 md:w-64 bg-[#101624] border-r border-slate-800 flex flex-col py-6 space-y-6 items-center md:items-start">
+            <a href="#" class="px-6 text-blue-500"><i class="fas fa-th-large mr-3"></i><span class="hidden md:inline italic">Overview</span></a>
+            <a href="#" class="px-6 hover:text-white"><i class="fas fa-server mr-3 text-slate-500"></i><span class="hidden md:inline">Servers</span></a>
+            <a href="#" class="px-6 hover:text-white"><i class="fas fa-hdd mr-3 text-slate-500"></i><span class="hidden md:inline">Nodes</span></a>
+            <a href="#" class="px-6 hover:text-white"><i class="fas fa-users mr-3 text-slate-500"></i><span class="hidden md:inline">Users</span></a>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <h2 class="text-2xl font-bold text-white">Gambaran Umum Administratif</h2>
+                <span class="text-xs bg-green-500/10 text-green-400 border border-green-500/30 px-2 py-1 rounded mt-2 md:mt-0">v1.12.0 - Stable</span>
+            </div>
+
+            <div class="bg-green-600/10 border-l-4 border-green-500 p-4 rounded text-green-400 flex items-center shadow-sm">
+                <i class="fas fa-check-circle mr-3"></i>
+                <p class="text-sm font-medium">Server Zildx berhasil di-deploy. Sistem berjalan pada node sin1-01.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-[#101624] p-6 rounded-lg border border-slate-800 shadow-xl">
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">CPU Usage</p>
+                    <p class="text-3xl font-mono text-white mt-1">12.5%</p>
+                    <div class="w-full bg-slate-800 h-1 mt-4 rounded-full overflow-hidden">
+                        <div class="bg-blue-500 h-full w-[12%]"></div>
+                    </div>
+                </div>
+                <div class="bg-[#101624] p-6 rounded-lg border border-slate-800 shadow-xl">
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Memory</p>
+                    <p class="text-3xl font-mono text-white mt-1">1.2GB <span class="text-sm text-slate-500">/ 4GB</span></p>
+                    <div class="w-full bg-slate-800 h-1 mt-4 rounded-full overflow-hidden">
+                        <div class="bg-purple-500 h-full w-[30%]"></div>
+                    </div>
+                </div>
+                <div class="bg-[#101624] p-6 rounded-lg border border-slate-800 shadow-xl">
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Uptime</p>
+                    <p class="text-3xl font-mono text-green-400 mt-1">99.9%</p>
+                </div>
+            </div>
+
+            <div class="bg-[#070a13] rounded-lg border border-slate-800 overflow-hidden shadow-2xl">
+                <div class="bg-[#101624] p-3 border-b border-slate-800 flex justify-between">
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Console Output</span>
+                    <div class="flex space-x-2">
+                        <button onclick="setStatus('RUNNING')" class="bg-blue-600 hover:bg-blue-700 text-[10px] px-3 py-1 rounded font-bold transition">START</button>
+                        <button onclick="setStatus('STOPPED')" class="bg-red-600 hover:bg-red-700 text-[10px] px-3 py-1 rounded font-bold transition">STOP</button>
+                    </div>
+                </div>
+                <div id="console" class="p-4 h-48 font-mono text-xs overflow-y-auto space-y-1">
+                    <p class="text-slate-500">[SYSTEM]: Initializing Zildx-Panel v1.12.0...</p>
+                    <p class="text-green-500">[SYSTEM]: Node connected: sin1-primary-node</p>
+                    <p class="text-blue-400">[ZILDX]: Mempersiapkan environment belajar 0 biaya...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Update Jam Real-Time
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Simulasi Console
+        function setStatus(status) {
+            const con = document.getElementById('console');
+            const p = document.createElement('p');
+            p.className = status === 'RUNNING' ? 'text-green-400' : 'text-red-400';
+            p.innerText = `[ACTION]: Server status changed to ${status}`;
+            con.appendChild(p);
+            con.scrollTop = con.scrollHeight;
+        }
+    </script>
+</body>
+</html>
